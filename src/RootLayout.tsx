@@ -4,7 +4,7 @@ import Footer from "./component/Footer";
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <section className="h-screen w-full bg-bg flex justify-center items-center gap-6  flex-col">
+    <section className="w-full bg-bg flex justify-center items-center gap-6  flex-col">
       <Header />
       {children}
       <Footer />
