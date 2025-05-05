@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header className="w-full px-6 lg:px-10 py-10 flex justify-center items-center">
+    <header className="w-full px-6 lg:px-10 py-10 flex justify-center items-center flex-col gap-1">
       <img
         src="/vite.svg"
         width={60}
