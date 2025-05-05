@@ -12,7 +12,7 @@ const WeatherByWeekday = ({
   return (
     <article
       onClick={action}
-      className={`w-full cursor-pointer p-6 rounded-xl border transition-all ${
+      className={`w-full lg:w-xs cursor-pointer p-6 rounded-xl border transition-all ${
         currentDay === day ? "border-accent" : "border-foreground"
       }`}
     >

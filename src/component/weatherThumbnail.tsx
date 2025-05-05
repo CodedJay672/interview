@@ -8,10 +8,15 @@ const WeatherThumbnail = ({
   temperature: number;
 }) => {
   return (
-    <article className="w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] p-3 space-y-3 rounded-lg border border-accent flex justify-center items-center flex-col">
+    <article className="w-32 p-3 space-y-3 rounded-lg border border-accent flex justify-center items-center flex-col">
       <TiWeatherWindyCloudy size={40} className="text-accent" />
-      <p className="font-light text-sm text-accent">{time}</p>
-      <p className="text-accent font-bold text-base">{temperature}°C</p>;
+      <p className="w-full text-center font-light text-sm text-accent">
+        {time}
+      </p>
+      <p className="w-full text-center text-accent font-bold text-base">
+        {temperature}°C
+      </p>
+      ;
     </article>
   );
 };

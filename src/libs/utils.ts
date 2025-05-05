@@ -1,21 +1,37 @@
-export const getDate = () => {
-  const today = new Date();
+import type { DaysMap } from "../App";
+import { weekdays } from "../constant";
 
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
-
-  const formattedDate = `${year}-${month}-${day}`;
-  return formattedDate;
+type HourlyData = {
+  time: string[];
+  temperature_2m: number[];
 };
 
-export const getTimeOfDay = () => {
-  const now = new Date();
+export const mapWeatherData = (hourly: HourlyData): DaysMap => {
+  const mapped: DaysMap = {};
 
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
+  hourly.time.forEach((iso: string, index: number) => {
+    const { day, hour } = extractDayAndHour(iso);
 
-  const currentTime = `${hours}:${minutes}`;
+    if (!weekdays.includes(day)) return;
 
-  return currentTime;
+    if (!mapped[day]) mapped[day] = { hourly: [] };
+
+    const entry = { time: hour, temperature: hourly.temperature_2m[index] };
+    mapped[day].hourly.push(entry);
+  });
+
+  return mapped;
+};
+
+export const extractDayAndHour = (
+  isoString: string
+): { day: string; hour: string } => {
+  const date = new Date(isoString);
+  const day = date.toLocaleDateString("en-US", { weekday: "long" });
+  const hour = date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+  return { day, hour };
 };
