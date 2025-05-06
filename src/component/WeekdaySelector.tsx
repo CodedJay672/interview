@@ -8,7 +8,10 @@ const WeekdaySelector: React.FC<{
   onDaySelect: (day: string) => void;
 }> = ({ weekdays, selectedDay, daysMap, onDaySelect }) => {
   return (
-    <div className="w-full flex items-center gap-4 py-10 overflow-x-scroll no-scrollbar">
+    <div className="w-full  lg:hidden flex flex-col gap-3 no-scrollbar overflow-x-auto mx-auto mt-10">
+      <div className="w-full flex justify-between items-center">
+        <h2 className="text-lg font-bold text-white">This week</h2>
+      </div>
       {weekdays.map((day) => (
         <WeatherByWeekday
           key={day}

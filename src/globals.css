@@ -44,3 +44,9 @@
   width: 10px;
   height: 10px;
 }
+
+@layer utilities {
+  .content-wrapper {
+    @apply w-full flex justify-between items-center flex-col bg-gradient-to-tr from-bg from-75% to-blue-400 px-6 lg:px-10;
+  }
+}

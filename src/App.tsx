@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import WeekdaySelector from "./component/WeekdaySelector";
 import HourlyWeatherDisplay from "./component/HourlyWeatherDisplay";
-import { mapWeatherData } from "./libs/utils";
+import { extractDayAndHour, mapWeatherData } from "./libs/utils";
 import { weekdays } from "./constant";
+import Footer from "./component/Footer";
+import Header from "./component/Header";
 
 export type HourlyEntry = {
   time: string;
@@ -18,10 +20,17 @@ export type DaysMap = {
 
 const App: React.FC = () => {
   const [daysMap, setDaysMap] = useState<DaysMap>({});
-  const [selectedDay, setSelectedDay] = useState<string>("Monday");
+
+  const [today, setToday] = useState<string>("");
 
   const fetchWeather = async () => {
     try {
+      const now = new Date();
+
+      const { day } = extractDayAndHour(now.toISOString());
+
+      setToday(day);
+
       const response = await axios.get(
         "https://api.open-meteo.com/v1/forecast?latitude=6.5244&longitude=3.3792&hourly=temperature_2m"
       );
@@ -41,15 +50,20 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <section className="w-full max-w-3xl space-y-4 mx-auto px-10 min-h-[calc(100vh-200px)]">
-      <WeekdaySelector
-        weekdays={weekdays}
-        selectedDay={selectedDay}
-        daysMap={daysMap}
-        onDaySelect={setSelectedDay}
-      />
-      <HourlyWeatherDisplay hourlyData={daysMap[selectedDay]?.hourly || []} />
-    </section>
+    <div className="content-wrapper min-h-screen">
+      <Header />
+      <main className="w-full max-w-screen-md mx-auto flex flex-col gap-3 overflow-hidden">
+        <HourlyWeatherDisplay hourlyData={daysMap[today]?.hourly || []} />
+
+        <WeekdaySelector
+          weekdays={weekdays}
+          selectedDay={today}
+          daysMap={daysMap}
+          onDaySelect={setToday}
+        />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
