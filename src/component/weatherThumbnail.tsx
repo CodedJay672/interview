@@ -11,7 +11,7 @@ const WeatherThumbnail = ({
 }) => {
   return (
     <article
-      className={`flex-shrink-0 flex items-center gap-2 w-[calc(100%-15rem)] md:w-[calc(100%-40rem)] border border-accent p-4  rounded-xl ${
+      className={`flex-shrink-0 flex items-center gap-2 w-[calc(100%-5rem)] md:w-[calc(100%-40rem)] border border-accent p-4  rounded-xl ${
         currentTime === time && "bg-accent"
       }`}
     >
