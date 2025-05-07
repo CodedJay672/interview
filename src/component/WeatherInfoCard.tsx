@@ -19,7 +19,9 @@ const WeatherByWeekday = ({
       }`}
     >
       <div>
-        <p className="font-bold text-white transition-all">{day}</p>
+        <p className="font-bold text-white transition-all">
+          {day.slice(0, 3).toUpperCase()}
+        </p>
       </div>
 
       <div className="relative flex">

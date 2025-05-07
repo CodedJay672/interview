@@ -8,23 +8,25 @@ const WeekdaySelector: React.FC<{
   onDaySelect: (day: string) => void;
 }> = ({ weekdays, selectedDay, daysMap, onDaySelect }) => {
   return (
-    <div className="w-full  lg:hidden flex flex-col gap-3 no-scrollbar overflow-x-auto mx-auto mt-10">
+    <>
       <div className="w-full flex justify-between items-center">
         <h2 className="text-lg font-bold text-white">This week</h2>
       </div>
-      {weekdays.map((day) => (
-        <WeatherByWeekday
-          key={day}
-          currentDay={selectedDay}
-          day={day}
-          temp={
-            daysMap[day]?.hourly.find((entry) => entry.time === "00:00")
-              ?.temperature
-          }
-          action={() => onDaySelect(day)}
-        />
-      ))}
-    </div>
+      <div className="w-full flex flex-col lg:flex-row gap-3 no-scrollbar overflow-x-auto mx-auto mt-10 lg:mt-1">
+        {weekdays.map((day) => (
+          <WeatherByWeekday
+            key={day}
+            currentDay={selectedDay}
+            day={day}
+            temp={
+              daysMap[day]?.hourly.find((entry) => entry.time === "00:00")
+                ?.temperature
+            }
+            action={() => onDaySelect(day)}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
